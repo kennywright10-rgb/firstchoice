@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reputation Engine — First Choice Med Spas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0B1F3A;--blue:#1A6EFF;--blue-light:#3B8BFF;--coral:#F07248;--coral-light:#F5895E;--white:#FFFFFF;--gray-100:#F4F7FC;--gray-200:#E8EDF5;--gray-500:#8494A9;--gray-700:#3D4F63;--green:#22C55E;--gold:#F5A623;--radius:12px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--navy);background:var(--white);line-height:1.6}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,31,58,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.07);height:68px;display:flex;align-items:center}
+  .nav-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-weight:900;color:white;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .logo-pin{width:24px;height:31px;flex-shrink:0}
+  .logo-text .l1{font-size:1.05rem;font-weight:900;color:white;line-height:1;letter-spacing:-0.3px;display:block}
+  .logo-text .l2{font-size:0.62rem;font-weight:700;color:var(--blue-light);letter-spacing:2.5px;text-transform:uppercase;display:block}
+  .logo-group{display:flex;flex-direction:column;gap:2px}
+  .logo-tagline{font-size:0.55rem;color:rgba(255,255,255,0.28);letter-spacing:0.6px;text-transform:uppercase;padding-left:34px}
+  .nav-links{display:flex;align-items:center;gap:6px}
+  .nav-links a{color:rgba(255,255,255,0.6);font-size:0.88rem;text-decoration:none;padding:7px 14px;border-radius:8px;transition:all 0.2s}
+  .nav-links a:hover{color:white;background:rgba(255,255,255,0.08)}
+  .nav-cta{background:var(--coral)!important;color:white!important;font-weight:700!important;margin-left:8px;padding:8px 20px!important;border-radius:50px!important}
+
+  .svc-hero{background:var(--navy);padding:120px 40px 72px;position:relative;overflow:hidden}
+  .svc-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:700px;height:700px;background:radial-gradient(ellipse,rgba(240,114,72,0.08) 0%,transparent 65%);pointer-events:none}
+  .svc-hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .breadcrumb{font-size:0.78rem;color:rgba(255,255,255,0.35);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+  .breadcrumb a{color:rgba(255,255,255,0.45);text-decoration:none}
+  .svc-num{font-size:0.78rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .svc-num::before{content:'';display:inline-block;width:28px;height:2px;background:var(--gold)}
+  .svc-hero h1{font-size:clamp(2rem,3.8vw,3.2rem);font-weight:900;color:white;letter-spacing:-1.8px;line-height:1.08;margin-bottom:20px}
+  .svc-hero h1 em{font-style:normal;color:var(--gold)}
+  .svc-hero p{font-size:1rem;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:32px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-coral{background:var(--coral);color:white;padding:15px 32px;border-radius:50px;font-weight:700;font-size:0.95rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;box-shadow:0 4px 24px rgba(240,114,72,0.4)}
+  .btn-coral:hover{background:var(--coral-light);transform:translateY(-2px)}
+  .btn-ghost{color:rgba(255,255,255,0.75);padding:15px 26px;border-radius:50px;font-weight:600;font-size:0.9rem;text-decoration:none;border:1.5px solid rgba(255,255,255,0.28);transition:all 0.2s;display:inline-flex;align-items:center}
+  .btn-ghost:hover{color:white;border-color:rgba(255,255,255,0.5)}
+
+  .hero-review-stack{display:flex;flex-direction:column;gap:14px}
+  .review-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.09);border-radius:16px;padding:18px 20px}
+  .rc-stars{color:var(--gold);font-size:0.85rem;letter-spacing:2px;margin-bottom:6px}
+  .rc-text{font-size:0.85rem;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:8px;font-style:italic}
+  .rc-attr{font-size:0.74rem;color:rgba(255,255,255,0.35)}
+  .rc-new{display:inline-block;background:rgba(34,197,94,0.15);color:var(--green);font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:100px;margin-left:8px}
+
+  .section{padding:80px 40px}
+  .section-inner{max-width:1100px;margin:0 auto}
+  .section-label{font-size:0.78rem;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:block}
+  .section-title{font-size:clamp(1.6rem,2.8vw,2.3rem);font-weight:900;letter-spacing:-1px;line-height:1.12;margin-bottom:14px}
+  .section-sub{font-size:0.97rem;color:var(--gray-700);max-width:620px;line-height:1.8}
+  .bg-gray{background:var(--gray-100)}
+
+  .what-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:48px}
+  .what-text p{font-size:0.97rem;color:var(--gray-700);line-height:1.8;margin-bottom:18px}
+  .what-features{display:flex;flex-direction:column;gap:14px}
+  .wf-item{display:flex;align-items:flex-start;gap:13px;padding:16px 18px;background:white;border-radius:var(--radius);border-left:3px solid var(--coral);box-shadow:0 2px 10px rgba(11,31,58,0.06)}
+  .wf-icon{font-size:1.1rem;flex-shrink:0;width:28px;text-align:center;margin-top:1px}
+  .wf-text strong{display:block;font-size:0.88rem;font-weight:700;margin-bottom:2px}
+  .wf-text span{font-size:0.82rem;color:var(--gray-500);line-height:1.5}
+
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
+  .step-card{background:white;border-radius:18px;padding:32px 28px;box-shadow:0 4px 20px rgba(11,31,58,0.07);position:relative;overflow:hidden}
+  .step-card::before{content:attr(data-step);position:absolute;top:-10px;right:12px;font-size:5rem;font-weight:900;color:rgba(240,114,72,0.06);line-height:1;pointer-events:none}
+  .step-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--coral);color:white;border-radius:50%;font-size:0.8rem;font-weight:900;margin-bottom:16px}
+  .step-card h3{font-size:1.05rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.3px}
+  .step-card p{font-size:0.87rem;color:var(--gray-700);line-height:1.7}
+  .step-timeline{font-size:0.75rem;font-weight:700;color:var(--coral);text-transform:uppercase;letter-spacing:1px;margin-top:14px}
+
+  .includes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+  .include-item{display:flex;align-items:flex-start;gap:12px;padding:20px;background:white;border-radius:var(--radius);box-shadow:0 2px 12px rgba(11,31,58,0.06)}
+  .ii-check{width:22px;height:22px;background:rgba(34,197,94,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:0.72rem;font-weight:800;flex-shrink:0;margin-top:1px}
+  .ii-text strong{display:block;font-size:0.88rem;font-weight:700;margin-bottom:2px}
+  .ii-text span{font-size:0.8rem;color:var(--gray-500);line-height:1.5}
+
+  .results-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+  .result-card{background:white;border-radius:18px;padding:28px;box-shadow:0 4px 20px rgba(11,31,58,0.07);text-align:center}
+  .rc-before-after{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px}
+  .rc-before{font-size:1.1rem;font-weight:700;color:#EF4444}
+  .rc-arrow{font-size:0.9rem;color:var(--gray-500)}
+  .rc-after{font-size:1.3rem;font-weight:900;color:var(--green)}
+  .rc-metric{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray-500);margin-bottom:8px}
+  .rc-name{font-size:0.82rem;color:var(--gray-700);font-style:italic}
+
+  .cta-section{background:var(--navy);padding:72px 40px;text-align:center;position:relative;overflow:hidden}
+  .cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(240,114,72,0.08) 0%,transparent 65%);pointer-events:none}
+  .cta-inner{max-width:640px;margin:0 auto;position:relative}
+  .cta-inner h2{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:900;color:white;letter-spacing:-1px;line-height:1.12;margin-bottom:12px}
+  .cta-inner p{font-size:0.97rem;color:rgba(255,255,255,0.5);margin-bottom:32px;line-height:1.75}
+  .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  footer{background:#060F1E;padding:56px 40px 32px}
+  .footer-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+  .footer-brand p{font-size:0.85rem;color:rgba(255,255,255,0.65);line-height:1.75;max-width:280px;margin-top:14px}
+  .footer-contact{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+  .footer-contact-item{font-size:0.83rem;color:rgba(255,255,255,0.72);display:flex;align-items:flex-start;gap:8px;line-height:1.55}
+  .footer-contact-item a{color:rgba(255,255,255,0.72);text-decoration:none}
+  .fc-icon{flex-shrink:0;font-size:0.85rem;margin-top:1px}
+  .footer-col h5{font-size:0.72rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:16px}
+  .footer-col a{display:block;font-size:0.86rem;color:rgba(255,255,255,0.72);text-decoration:none;margin-bottom:10px}
+  .footer-col a:hover{color:white}
+  .footer-bottom{max-width:1160px;margin:40px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center}
+  .footer-copy{font-size:0.8rem;color:rgba(255,255,255,0.45)}
+
+  @media(max-width:900px){.svc-hero-inner,.what-grid,.steps-grid,.includes-grid,.results-row{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.section{padding:48px 20px}.svc-hero{padding:100px 20px 52px}.footer-inner{grid-template-columns:1fr}.nav-links a:not(.nav-cta){display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <div class="logo-group">
+      <a href="index.html" class="logo">
+        <svg class="logo-pin" viewBox="0 0 24 31" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="lpg" x1="25%" y1="0%" x2="75%" y2="100%"><stop offset="0%" stop-color="#5BBEFF"/><stop offset="100%" stop-color="#1A6EFF"/></linearGradient></defs>
+          <path d="M12,1.5 C20,1.5 20.5,14 12,28.5 C3.5,14 4,1.5 12,1.5 Z" fill="none" stroke="url(#lpg)" stroke-width="3" stroke-linejoin="round"/>
+          <text x="12" y="14.5" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="'Arial Black',sans-serif" font-weight="900" font-size="11">1</text>
+        </svg>
+        <div class="logo-text"><span class="l1">First Choice</span><span class="l2">Med Spas</span></div>
+      </a>
+      <div class="logo-tagline">We help med spas become the first choice.</div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="services.html">Services</a><a href="index.html#pricing">Pricing</a><a href="book-a-call.html">Book a Call</a>
+      <a href="audit.html" class="nav-cta">Get Free Audit</a>
+    </div>
+  </div>
+</nav>
+
+<section class="svc-hero">
+  <div class="svc-hero-inner">
+    <div>
+      <div class="breadcrumb"><a href="index.html">Home</a> › <a href="services.html">Services</a> › Reputation Engine</div>
+      <div class="svc-num">Service 02 · Trust</div>
+      <h1>Turn Every Patient<br>Into a <em>5-Star Review.</em></h1>
+      <p>Reviews are the #1 factor patients use to choose a med spa. Our automated system generates a consistent stream of 5-star reviews — without you lifting a finger or awkwardly asking at the front desk.</p>
+      <div class="hero-ctas">
+        <a href="audit.html" class="btn-coral">See My Review Score →</a>
+        <a href="book-a-call.html" class="btn-ghost">Book a Call</a>
+      </div>
+    </div>
+    <div class="hero-review-stack">
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">"Dr. Chen is absolutely phenomenal. I went in for Botox and left feeling like a completely new person. The results are so natural."</div>
+        <div class="rc-attr">— Jennifer M. · 2 days ago <span class="rc-new">New</span></div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">"I've tried three med spas in Atlanta. This is the only one I'll ever go back to. The team is incredible and my skin has never looked better."</div>
+        <div class="rc-attr">— Sarah K. · 5 days ago <span class="rc-new">New</span></div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">"Booked after seeing their Google reviews. They lived up to every word. Already referred 3 friends."</div>
+        <div class="rc-attr">— Michelle T. · 1 week ago <span class="rc-new">New</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-gray">
+  <div class="section-inner">
+    <span class="section-label">What It Is</span>
+    <h2 class="section-title">A Review Machine That Runs Itself</h2>
+    <p class="section-sub">Most practices get reviews by accident. Our clients get them by design — automatically, consistently, at scale.</p>
+    <div class="what-grid">
+      <div class="what-text">
+        <p>Google ranks practices with more recent, high-quality reviews higher in local search. Patients choose practices with 4.8+ star ratings over anything lower. AI systems like ChatGPT and Perplexity weight review sentiment when deciding who to recommend.</p>
+        <p>The problem isn't that your patients don't want to leave reviews — they do. The problem is that asking for reviews is awkward, and most patients forget by the time they get home.</p>
+        <p>Our system sends automated, perfectly-timed review requests via SMS and email the moment a patient leaves your practice. The result: a 32% average review conversion rate, compared to the industry average of 4%.</p>
+      </div>
+      <div class="what-features">
+        <div class="wf-item"><span class="wf-icon">📱</span><div class="wf-text"><strong>Automated post-visit SMS requests</strong><span>Sent within 2 hours of the appointment — when the patient's experience is freshest.</span></div></div>
+        <div class="wf-item"><span class="wf-icon">📧</span><div class="wf-text"><strong>Email follow-up sequences</strong><span>A 3-touch email sequence for patients who don't open the SMS.</span></div></div>
+        <div class="wf-item"><span class="wf-icon">🛡️</span><div class="wf-text"><strong>Negative review interception</strong><span>Unhappy patients are routed to an internal feedback form — not Google.</span></div></div>
+        <div class="wf-item"><span class="wf-icon">💬</span><div class="wf-text"><strong>Review response management</strong><span>We respond to every review within 24 hours using your voice and tone.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <span class="section-label">How It Works</span>
+    <h2 class="section-title">Set It Up Once. Reviews Come In on Autopilot.</h2>
+    <p class="section-sub">You focus on patient care. The system handles the rest.</p>
+    <div class="steps-grid">
+      <div class="step-card" data-step="1">
+        <div class="step-num">1</div>
+        <h3>Connect Your PMS</h3>
+        <p>We integrate with your practice management system (or set up a simple manual trigger) to automatically flag patients for review requests after every visit.</p>
+        <div class="step-timeline">Week 1</div>
+      </div>
+      <div class="step-card" data-step="2">
+        <div class="step-num">2</div>
+        <h3>Automated Outreach</h3>
+        <p>Patients receive a personalized SMS 2 hours post-visit, followed by a branded email sequence if they don't respond. One tap takes them straight to your Google review page.</p>
+        <div class="step-timeline">Ongoing</div>
+      </div>
+      <div class="step-card" data-step="3">
+        <div class="step-num">3</div>
+        <h3>Monitor & Respond</h3>
+        <p>We monitor all incoming reviews, respond within 24 hours, escalate any issues to you, and send you a weekly review velocity dashboard.</p>
+        <div class="step-timeline">Ongoing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-gray">
+  <div class="section-inner">
+    <span class="section-label">What's Included</span>
+    <h2 class="section-title">Everything You Need to Dominate Your Review Profile</h2>
+    <div class="includes-grid">
+      <div class="include-item"><div class="ii-check">✓</div><div class="ii-text"><strong>PMS or manual trigger integration</strong><span>Works with most major practice management systems.</span></div></div>
+      <div class="include-item"><div class="ii-check">✓</div><div class="ii-text"><strong>Automated SMS review requests</strong><span>Sent within 2 hours of each patient visit.</span></div></div>
+      <div class="include-item"><div class="ii-check">✓</div><div class="ii-text"><strong>3-touch email follow-up sequence</strong><span>Branded to your practice, personalized by treatment type.</span></div></div>
+      <div class="include-item"><div class="ii-check">✓</div><div class="ii-text"><strong>Negative review interception</strong><span>Dissatisfied patients routed to private feedback — not public.</span></div></div>
+      <div class="include-item"><div class="ii-check">✓</div><div class="ii-text"><strong>Review response management</strong><span>All reviews responded to within 24 hours, in your voice.</span></div></div>
+      <div class="include-item"><div class="ii-check">✓</div><div class="ii-text"><strong>Weekly velocity dashboard</strong><span>Track new reviews, rating trend, and response rate.</span></div></div>
+      <div class="include-item"><div class="ii-check">✓</div><div class="ii-text"><strong>Multi-platform monitoring</strong><span>Google, Yelp, RealSelf, Healthgrades — all in one place.</span></div></div>
+      <div class="include-item"><div class="ii-check">✓</div><div class="ii-text"><strong>Competitor review benchmarking</strong><span>Monthly comparison of your review metrics vs. top 3 local competitors.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <span class="section-label">Real Results</span>
+    <h2 class="section-title">More Reviews. Higher Rating. More Patients.</h2>
+    <div class="results-row">
+      <div class="result-card">
+        <div class="rc-metric">Monthly New Reviews</div>
+        <div class="rc-before-after"><span class="rc-before">3</span><span class="rc-arrow">→</span><span class="rc-after">28</span></div>
+        <div class="rc-name">Skin Studio · Phoenix, AZ · First 90 days</div>
+      </div>
+      <div class="result-card">
+        <div class="rc-metric">Google Rating</div>
+        <div class="rc-before-after"><span class="rc-before">4.1</span><span class="rc-arrow">→</span><span class="rc-after">4.9</span></div>
+        <div class="rc-name">Renew Aesthetics · Denver, CO · 6 months</div>
+      </div>
+      <div class="result-card">
+        <div class="rc-metric">New Patients Citing Reviews</div>
+        <div class="rc-before-after"><span class="rc-before">12%</span><span class="rc-arrow">→</span><span class="rc-after">41%</span></div>
+        <div class="rc-name">Pure Beauty · Miami, FL · Patient intake survey</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Find Out How Your Review Score Compares</h2>
+    <p>Your free audit includes a full review velocity analysis and a side-by-side comparison against your top 3 competitors.</p>
+    <div class="cta-btns">
+      <a href="audit.html" class="btn-coral">Get My Free Review Audit →</a>
+      <a href="book-a-call.html" class="btn-ghost">Book a Strategy Call</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">
+        <svg class="logo-pin" viewBox="0 0 24 31" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="lpgf" x1="25%" y1="0%" x2="75%" y2="100%"><stop offset="0%" stop-color="#5BBEFF"/><stop offset="100%" stop-color="#1A6EFF"/></linearGradient></defs>
+          <path d="M12,1.5 C20,1.5 20.5,14 12,28.5 C3.5,14 4,1.5 12,1.5 Z" fill="none" stroke="url(#lpgf)" stroke-width="3" stroke-linejoin="round"/>
+          <text x="12" y="14.5" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="'Arial Black',sans-serif" font-weight="900" font-size="11">1</text>
+        </svg>
+        <div class="logo-text"><span class="l1">First Choice</span><span class="l2">Med Spas</span></div>
+      </a>
+      <p>We help independent med spas become the practices AI recommends — through Google Maps dominance, automated reviews, and AI-structured websites.</p>
+      <div class="footer-contact">
+        <div class="footer-contact-item"><span class="fc-icon">📍</span><span>6815 Sunbriar Drive, Cumming, GA 30040</span></div>
+        <div class="footer-contact-item"><span class="fc-icon">📞</span><a href="tel:6784780973">(678) 478-0973</a></div>
+        <div class="footer-contact-item"><span class="fc-icon">✉️</span><a href="mailto:info@firstchoicemedspas.com">info@firstchoicemedspas.com</a></div>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Services</h5><a href="service-maps.html">Google Maps Dominance</a><a href="service-reputation.html">Reputation Engine</a><a href="service-ai.html">AI Architecture</a><a href="service-website.html">Website Optimization</a></div>
+    <div class="footer-col"><h5>Company</h5><a href="index.html">Home</a><a href="index.html#results">Results</a><a href="index.html#pricing">Pricing</a><a href="index.html#faq">FAQ</a></div>
+    <div class="footer-col"><h5>Get Started</h5><a href="audit.html">Free Audit</a><a href="book-a-call.html">Book a Call</a><a href="mailto:info@firstchoicemedspas.com">Contact Us</a><a href="#">Privacy Policy</a></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 First Choice Med Spas. All rights reserved.</div>
+    <div class="footer-copy">We help med spas become the first choice.</div>
+  </div>
+</footer>
+</body>
+</html>

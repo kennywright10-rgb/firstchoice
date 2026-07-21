@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Med Spa Audit — First Choice Med Spas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0B1F3A;
+    --navy-mid: #112540;
+    --blue: #1A6EFF;
+    --blue-light: #5BBEFF;
+    --coral: #F07248;
+    --coral-light: #F5895E;
+    --white: #ffffff;
+    --gray-100: #F4F6F9;
+    --gray-400: #9BA3B0;
+    --gray-600: #6B7280;
+    --gold: #F5A623;
+    --radius: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(11,31,58,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 16px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: white;
+    font-size: 1.05rem; font-weight: 900; letter-spacing: -0.3px;
+  }
+  .logo svg { width: 22px; height: 28px; flex-shrink: 0; }
+  .logo .l2 { color: var(--blue-light); font-size: 0.6rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; display: block; }
+  .nav-right { font-size: 0.85rem; color: rgba(255,255,255,0.45); }
+  .nav-right a { color: var(--blue-light); text-decoration: none; font-weight: 600; }
+  .nav-right a:hover { text-decoration: underline; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(26,110,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(26,110,255,0.12); border: 1px solid rgba(26,110,255,0.25);
+    color: var(--blue-light); padding: 7px 18px; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  .hero-eyebrow span { width: 6px; height: 6px; background: var(--blue-light); border-radius: 50%; display: inline-block; }
+  .stat-block {
+    margin-bottom: 48px;
+  }
+  .stat-number {
+    font-size: clamp(5rem, 18vw, 11rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -4px;
+    color: white;
+    display: block;
+  }
+  .stat-number em {
+    color: var(--blue-light);
+    font-style: normal;
+  }
+  .stat-label {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    margin-top: 20px;
+    max-width: 560px;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.55;
+  }
+  .stat-label strong { color: white; font-weight: 700; }
+  .hero-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.45);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 52px;
+  }
+  .scroll-hint {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.25); font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+    margin-top: 16px;
+  }
+  .scroll-hint svg { opacity: 0.4; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin: 0;
+  }
+
+  /* ── WHAT YOUR AUDIT COVERS ── */
+  .covers {
+    padding: 100px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .covers-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--blue-light); margin-bottom: 20px; display: block;
+  }
+  .covers-headline {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900; line-height: 1.1;
+    letter-spacing: -1px; margin-bottom: 60px;
+    max-width: 640px;
+  }
+  .covers-headline em { color: var(--blue-light); font-style: normal; }
+  .covers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .covers-item {
+    padding: 36px 40px;
+    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.025);
+    transition: background 0.2s;
+  }
+  .covers-item:hover { background: rgba(26,110,255,0.06); }
+  .covers-num {
+    font-size: 0.68rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--blue); margin-bottom: 14px; display: block;
+  }
+  .covers-item h3 {
+    font-size: 1.05rem; font-weight: 800; color: white;
+    margin-bottom: 10px; line-height: 1.3;
+  }
+  .covers-item p {
+    font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7;
+  }
+
+  /* ── SOCIAL PROOF BAR ── */
+  .proof-bar {
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 40px;
+    display: flex; align-items: center; justify-content: center; gap: 48px;
+    flex-wrap: wrap;
+  }
+  .proof-stat { text-align: center; }
+  .proof-stat .pn { font-size: 1.6rem; font-weight: 900; color: white; display: block; }
+  .proof-stat .pl { font-size: 0.72rem; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+  .proof-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.08); }
+
+  /* ── FORM SECTION ── */
+  .form-section {
+    padding: 100px 40px;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .form-section .covers-label { display: block; text-align: center; }
+  .form-headline {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900; line-height: 1.1; letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .form-headline em { color: var(--coral); font-style: normal; }
+  .form-sub {
+    font-size: 0.97rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 48px;
+  }
+  .audit-form {
+    display: flex; flex-direction: column; gap: 14px;
+    text-align: left;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.55); letter-spacing: 0.3px; }
+  .form-field input, .form-field select {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 14px 16px;
+    color: white; font-family: 'Inter', sans-serif; font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s, background 0.2s;
+  }
+  .form-field input::placeholder { color: rgba(255,255,255,0.25); }
+  .form-field input:focus, .form-field select:focus {
+    border-color: var(--blue); background: rgba(26,110,255,0.08);
+  }
+  .form-field select { color: rgba(255,255,255,0.6); cursor: pointer; }
+  .form-field select option { background: #0B1F3A; color: white; }
+  .form-submit {
+    background: var(--coral); color: white; border: none; border-radius: 50px;
+    padding: 18px 36px; font-size: 1rem; font-weight: 800;
+    cursor: pointer; transition: background 0.2s, transform 0.2s;
+    letter-spacing: 0.2px; margin-top: 8px;
+    box-shadow: 0 4px 28px rgba(240,114,72,0.35);
+  }
+  .form-submit:hover { background: var(--coral-light); transform: translateY(-2px); }
+  .form-fine {
+    font-size: 0.78rem; color: rgba(255,255,255,0.25);
+    text-align: center; margin-top: 16px; line-height: 1.6;
+  }
+
+  /* ── WHAT YOU'LL GET ── */
+  .deliverables {
+    background: rgba(255,255,255,0.025);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .deliverables-inner { max-width: 900px; margin: 0 auto; }
+  .deliverables h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900;
+    letter-spacing: -0.5px; margin-bottom: 48px;
+  }
+  .deliverables h2 em { color: var(--blue-light); font-style: normal; }
+  .del-list {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    list-style: none; text-align: left;
+  }
+  .del-item {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .del-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(26,110,255,0.12); border: 1px solid rgba(26,110,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .del-item h4 { font-size: 0.95rem; font-weight: 700; color: white; }
+  .del-item p { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.65; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.78rem; color: rgba(255,255,255,0.25);
+  }
+  footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+
+  /* ── SUCCESS STATE ── */
+  .success-msg {
+    display: none; text-align: center; padding: 48px 32px;
+    background: rgba(26,110,255,0.08); border: 1px solid rgba(26,110,255,0.2);
+    border-radius: var(--radius);
+  }
+  .success-msg h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
+  .success-msg p { color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.7; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .stat-number { letter-spacing: -2px; }
+    .covers { padding: 64px 24px; }
+    .covers-grid { grid-template-columns: 1fr; }
+    .form-section { padding: 64px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+    .del-list { grid-template-columns: 1fr; }
+    .proof-bar { gap: 24px; }
+    .proof-divider { display: none; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <svg viewBox="0 0 24 31" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="nlg" x1="25%" y1="0%" x2="75%" y2="100%">
+          <stop offset="0%" stop-color="#5BBEFF"/>
+          <stop offset="100%" stop-color="#1A6EFF"/>
+        </linearGradient>
+      </defs>
+      <path d="M12,1.5 C20,1.5 20.5,14 12,28.5 C3.5,14 4,1.5 12,1.5 Z" fill="none" stroke="url(#nlg)" stroke-width="3" stroke-linejoin="round"/>
+      <text x="12" y="14.5" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="'Arial Black',sans-serif" font-weight="900" font-size="11">1</text>
+    </svg>
+    <div>
+      First Choice<span class="l2">Med Spas</span>
+    </div>
+  </a>
+  <div class="nav-right">Already a client? <a href="mailto:hello@firstchoicemedspas.com">hello@firstchoicemedspas.com</a></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow"><span></span>Free Practice Audit</div>
+
+  <div class="stat-block">
+    <span class="stat-number"><em>72</em>%</span>
+    <p class="stat-label">
+      of independent med spas are <strong>completely invisible</strong> to AI search engines — sending patients directly to the chains.
+    </p>
+  </div>
+
+  <p class="hero-sub">
+    ChatGPT, Google AI Overview, and Ask Maps now answer "best med spa near me" without a single ad dollar. If your practice isn't built for it, they're recommending Ideal Image and LaserAway instead of you — right now.
+  </p>
+
+  <a href="#get-audit" style="display:inline-flex; align-items:center; gap:10px; background:var(--coral); color:white; padding:17px 38px; border-radius:50px; font-weight:800; font-size:1rem; text-decoration:none; box-shadow:0 4px 28px rgba(240,114,72,0.35); transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+    Get My Free Audit →
+  </a>
+
+  <div class="scroll-hint" style="margin-top:48px;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    See what we audit
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- WHAT YOUR AUDIT COVERS -->
+<div class="covers">
+  <span class="covers-label">What We Analyze</span>
+  <h2 class="covers-headline">Your audit covers <em>every gap</em> between you and a full calendar.</h2>
+
+  <div class="covers-grid">
+    <div class="covers-item">
+      <span class="covers-num">01</span>
+      <h3>Google Business Profile Score</h3>
+      <p>We assess your GBP against the top-ranked med spas in your market — categories, photos, Q&As, service descriptions, post frequency. Most practices score 40–60%. We show you exactly what's missing.</p>
+    </div>
+    <div class="covers-item">
+      <span class="covers-num">02</span>
+      <h3>Review Velocity vs. Competitors</h3>
+      <p>Total review count matters less than how fast new reviews are coming in. We compare your review velocity against Ideal Image, LaserAway, and your top local competitors — and show you the gap.</p>
+    </div>
+    <div class="covers-item">
+      <span class="covers-num">03</span>
+      <h3>AI Search Visibility</h3>
+      <p>We test whether ChatGPT, Google AI Overview, and Ask Maps recommend your practice for "best med spa near me" and your top treatments. If they don't know you exist, your patients won't either.</p>
+    </div>
+    <div class="covers-item">
+      <span class="covers-num">04</span>
+      <h3>Website Structure for Local SEO</h3>
+      <p>We audit your site for the 30 treatment + location keyword pages that drive organic Google traffic — Botox [city], laser hair removal [neighborhood], HydraFacial [city]. Most med spa sites capture fewer than 5.</p>
+    </div>
+    <div class="covers-item">
+      <span class="covers-num">05</span>
+      <h3>Competitor Gap Analysis</h3>
+      <p>We map exactly where your top 3 competitors are outranking you and why — so your action plan targets the gaps with the highest patient volume, not just the easiest wins.</p>
+    </div>
+    <div class="covers-item">
+      <span class="covers-num">06</span>
+      <h3>Personalized Action Plan</h3>
+      <p>Everything above becomes a prioritized, step-by-step action plan specific to your practice, your market, and your competition. You'll know exactly what to fix first and what the impact will be.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-stat">
+    <span class="pn">200+</span>
+    <span class="pl">Practices audited</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <span class="pn">Top 3</span>
+    <span class="pl">Maps ranking in 90 days</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <span class="pn">$0</span>
+    <span class="pl">Ad spend required</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <span class="pn">24 hrs</span>
+    <span class="pl">Audit delivery time</span>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- WHAT YOU'LL GET -->
+<div class="deliverables">
+  <div class="deliverables-inner">
+    <h2>Your audit is <em>free</em>. What you'll receive is not small.</h2>
+    <ul class="del-list">
+      <li class="del-item">
+        <div class="del-icon">📊</div>
+        <h4>Visibility Score Report</h4>
+        <p>A scored breakdown of your Google, review, website, and AI search presence — benchmarked against your local competitors.</p>
+      </li>
+      <li class="del-item">
+        <div class="del-icon">🗺️</div>
+        <h4>Maps Ranking Analysis</h4>
+        <p>See exactly where you rank in Google Maps for your top 10 treatment searches in your market, and why.</p>
+      </li>
+      <li class="del-item">
+        <div class="del-icon">🤖</div>
+        <h4>AI Recommendation Test</h4>
+        <p>We run your practice against 4 AI search engines and show you verbatim what they say when patients ask for the best med spa near you.</p>
+      </li>
+      <li class="del-item">
+        <div class="del-icon">⭐</div>
+        <h4>Review Velocity Benchmark</h4>
+        <p>Your review count and speed vs. every competitor in your zip code — ranked and explained.</p>
+      </li>
+      <li class="del-item">
+        <div class="del-icon">🌐</div>
+        <h4>Website Keyword Gap</h4>
+        <p>The specific treatment + location pages your site is missing that are driving organic Google traffic to your competitors right now.</p>
+      </li>
+      <li class="del-item">
+        <div class="del-icon">📋</div>
+        <h4>Prioritized Action Plan</h4>
+        <p>A clear, ordered list of what to fix — ranked by patient impact, not complexity. Know exactly where to start.</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- FORM -->
+<section class="form-section" id="get-audit">
+  <span class="covers-label">Request Your Free Audit</span>
+  <h2 class="form-headline">Find out where patients are <em>slipping through</em>.</h2>
+  <p class="form-sub">Tell us about your practice and we'll deliver your full audit and personalized action plan within 24 hours. Free. No sales pitch. No obligation.</p>
+
+  <form class="audit-form" id="auditForm" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-field">
+        <label for="fname">Your name</label>
+        <input type="text" id="fname" placeholder="Dr. Sarah Mitchell" required>
+      </div>
+      <div class="form-field">
+        <label for="role">Your role</label>
+        <select id="role">
+          <option value="" disabled selected>Select your role</option>
+          <option>Owner / Medical Director</option>
+          <option>Practice Manager</option>
+          <option>Nurse Practitioner</option>
+          <option>Aesthetician / Provider</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="biz">Practice name</label>
+      <input type="text" id="biz" placeholder="Glow Aesthetics & Wellness" required>
+    </div>
+    <div class="form-row">
+      <div class="form-field">
+        <label for="city">City & state</label>
+        <input type="text" id="city" placeholder="Scottsdale, AZ" required>
+      </div>
+      <div class="form-field">
+        <label for="website">Website (optional)</label>
+        <input type="text" id="website" placeholder="yourmeds pa.com">
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="email">Email address</label>
+      <input type="email" id="email" placeholder="sarah@glowspa.com" required>
+    </div>
+    <button type="submit" class="form-submit">Send My Free Audit + Action Plan →</button>
+    <p class="form-fine">Delivered within 24 hours. Zero pressure, zero pitch. We'll show you what we find — you decide what to do with it.</p>
+  </form>
+
+  <div class="success-msg" id="successMsg">
+    <h3>🎉 You're on the list.</h3>
+    <p>We'll have your full audit and personalized action plan in your inbox within 24 hours.<br>Check your spam folder just in case — and feel free to reply to that email with any questions.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#">
+    <svg width="18" height="23" viewBox="0 0 24 31" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:8px;">
+      <path d="M12,1.5 C20,1.5 20.5,14 12,28.5 C3.5,14 4,1.5 12,1.5 Z" fill="none" stroke="#5BBEFF" stroke-width="3" stroke-linejoin="round"/>
+      <text x="12" y="14.5" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="'Arial Black',sans-serif" font-weight="900" font-size="11">1</text>
+    </svg>
+    First Choice Med Spas
+  </a>
+  <span>© 2026 First Choice Med Spas. We help med spas become the first choice.</span>
+  <a href="mailto:hello@firstchoicemedspas.com">hello@firstchoicemedspas.com</a>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('auditForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+
+</body>
+</html>
